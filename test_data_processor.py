@@ -7,7 +7,7 @@ class TestDataProcessor(unittest.TestCase):
 
     def test_process_data(self):
       """Test that process_data returns a dictionary with expected keys."""
-      results = process_data()
+      result = process_data()
       self.assertIsInstance(result, dict)
       self.assertIn('processed_at', result)
       self.assertIn('values', result)
