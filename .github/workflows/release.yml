@@ -1,0 +1,57 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Run when tag is pushed like v1.0.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+
+      -name : Install dependencies
+          run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest build
+
+      - name: Run tests
+        run: pytest
+
+      - name: Create release
+        id: create_release
+        uses: actions/create_release@v1
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN}}
+        with:
+          tag_name: ${{ github.ref}}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Run and upload results
+        run: |
+          python data_processor.py
+          zip -r results.zip results/
+      
+      - name: Upload Results
+        uses: actions/upload-release-asset@v1
+        env:
+          
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN}}
+
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./results.zip
+          asset_name: results.zip
+          asset_content_type: application/zip
