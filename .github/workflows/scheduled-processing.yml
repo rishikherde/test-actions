@@ -5,7 +5,7 @@ on:
     - cron: '0 12 * * *' #Run at 12:00 UTC daily
   workflow_dispatch:  #Allow manucal triggering
 
-permissisons:
+permissions:
   contents: write
 
 jobs:
