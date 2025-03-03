@@ -10,7 +10,7 @@ def process_data():
           "processed_at": datetime.now().isoformat(),
           "values": [10,20,30,40,50],
           "average": 30,
-          "sum", 150
+          "sum": 150
 
       }
   return data

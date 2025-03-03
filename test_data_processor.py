@@ -27,7 +27,7 @@ class TestDataProcessor(unittest.TestCase):
       with open(test_file, 'r') as f:
         saved_data = json.load(f)
 
-      self.assertEqual(saved_data,test_data)
+      self.assertEqual(saved_data, test_data)
 
 if __name__ == '__main__':
     unittest.main()
