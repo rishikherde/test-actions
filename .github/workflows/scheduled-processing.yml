@@ -8,7 +8,6 @@ on:
 permissions:
   contents: write
 
-
 jobs:
   process:
     runs-on: ubuntu-latest
