@@ -30,7 +30,7 @@ def save_results(data, output_file="results/output.json"):
 def main():
     print("Starting data processing script...")
     data = process_data()
-    success = save_result(data)
+    success = save_results(data)
     if success:
         print("Processing completed successfully!")
     else:
