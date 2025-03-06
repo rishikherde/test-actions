@@ -123,7 +123,7 @@ jobs:
                 git config --global user.name "rishikherde"
                 git config --global user.email "rishikherde8@gmail.com"
                 mv data/transformed.csv modified_students_data.csv
-                git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/<username>/<repo>.git
+                git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/rishikherde/test-actions.git
                 git add modified_students_data.csv
                 git commit -m "Updated CSV file after transformation"
                 git push
