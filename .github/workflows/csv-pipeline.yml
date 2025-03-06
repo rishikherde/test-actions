@@ -38,11 +38,11 @@ jobs:
                 python-version: '3.10'
             
             - name: Debug - List Files
-              run: ls -R
+              run: ls -R /home/runner/work/test-actions/test-actions/ 
 
             - name: Transformations
               run: |
-                python /home/runner/work/test-actions/test-actions/scripts/transform.py data/students_data.csv data/transformed.csv
+                python transform.py data/students_data.csv data/transformed.csv
 
             - name: Uploading new csv artifact
               uses: actions/upload-artifact@v4
