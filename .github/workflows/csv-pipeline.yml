@@ -129,4 +129,4 @@ jobs:
                   git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/rishikherde/test-actions.git
                   git add modified_students_data.csv
                   git diff --quiet || git commit -m "Updated CSV file after transformation"
-                  git push origin HEAD:${{ github.ref_name }}
+                  git push origin HEAD:refs/heads/${{ github.ref_name }}
