@@ -42,7 +42,8 @@ jobs:
 
             - name: Transformations
               run: |
-                python transform.py data/students_data.csv data/transformed.csv
+                python scripts/transform.py data/students_data.csv data/transformed.csv
+              working-directory: /home/runner/work/test-actions/test-actions/ 
 
             - name: Uploading new csv artifact
               uses: actions/upload-artifact@v4
