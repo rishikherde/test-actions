@@ -1,6 +1,9 @@
 name: CSV processing pipeline
 
 on:
+    push:
+      branches:
+        - main
     workflow_dispatch:
 jobs:
     extract:
@@ -9,6 +12,7 @@ jobs:
             - name: Checkout repo
               uses: actions/checkout@v4
               with:
+                ref : main
                 fetch-depth: 0
                 persist-credentials: false
             
@@ -43,14 +47,7 @@ jobs:
             
             - name: print pwd
               run: pwd
-
-            - name: Manually Create Transform Script
-              run: |
-                mkdir -p scripts
-                echo 'print("Hello from transform.py")' > scripts/transform.py
-                python scripts/transform.py
  
-            
             - name: Transformations
               run: |
                 python /home/runner/work/test-actions/test-actions/scripts/transform.py data/students_data.csv data/transformed.csv
