@@ -119,6 +119,8 @@ jobs:
                 path: data/
 
             - name: Commit and push changes
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                 git config --global user.name "rishikherde"
                 git config --global user.email "rishikherde8@gmail.com"
