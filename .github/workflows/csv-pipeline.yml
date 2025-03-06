@@ -42,6 +42,14 @@ jobs:
               with:
                 python-version: '3.10'
             
+            - name: Create target directory
+              run: mkdir -p /tmp/my_python_scripts
+        
+            - name: Copy Python scripts to runner
+              run: |
+                  cp scripts/*.py /tmp/my_python_scripts
+                  ls -R /tmp/my_python_scripts
+            
             - name: Debug - List Files
               run: ls -R /home/runner/work/test-actions/test-actions/ 
             
@@ -50,7 +58,7 @@ jobs:
  
             - name: Transformations
               run: |
-                python ./scripts/transform.py data/students_data.csv data/transformed.csv
+                python /tmp/my_python_scripts/transform.py data/students_data.csv data/transformed.csv
               working-directory: /home/runner/work/test-actions/test-actions/ 
 
             - name: Uploading new csv artifact
