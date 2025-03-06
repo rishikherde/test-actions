@@ -11,10 +11,13 @@ jobs:
               with:
                 fetch-depth: 0
             
-            - name: Copy CSV
+            - name: Copy CSV and python files
               run: |
                 mkdir -p data
                 cp students_data.csv data/students_data.csv
+                mkdir -p scripts
+                cp transform.py scripts/transfrom.py
+                cp test_transform.py scripts/test_transform.py
 
             - name: Upload CSV artifact
               uses: actions/upload-artifact@v4
