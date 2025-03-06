@@ -120,12 +120,12 @@ jobs:
 
             - name: Commit and push changes
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
               run: |
-                git config --global user.name "GitHub Actions"
-                git config --global user.email "actions@github.com"
-                mv data/transformed.csv modified_students_data.csv
-                git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/rishikherde/test-actions.git
-                git add modified_students_data.csv
-                git commit -m "Updated CSV file after transformation"
-                git push
+                  git config --global user.name "GitHub Actions"
+                  git config --global user.email "actions@github.com"
+                  mv data/transformed.csv modified_students_data.csv
+                  git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/rishikherde/test-actions.git
+                  git add modified_students_data.csv
+                  git diff --quiet || git commit -m "Updated CSV file after transformation"
+                  git push
