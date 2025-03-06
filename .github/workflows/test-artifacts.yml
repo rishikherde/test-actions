@@ -17,6 +17,12 @@ jobs:
             echo "Compiling application...."
             mkdir -p build_output
             echo "Build successful!" > build_output.log
+
+        - name: Verify build o/p
+          run: ls -la build_output/
+
+        - name: Debug path
+          run: ls -R build_output/
         
         - name: Upload build artifact
           uses: actions/upload-artifact@v4
@@ -33,6 +39,9 @@ jobs:
         with:
           name: build-artifact
           path: build_output/
+
+      - name: Verify downloaded files
+        run: ls -la build_output/
           
       - name: Run tests
         run: |
