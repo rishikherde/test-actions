@@ -54,6 +54,9 @@ jobs:
             
             - name: print pwd
               run: pwd
+            
+            - name: Install depencencies
+              run: pip install pandas
  
             - name: Transformations
               run: |
