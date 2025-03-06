@@ -1,4 +1,4 @@
-name: CSV preocessing pipeline
+name: CSV processing pipeline
 
 on:
     workflow_dispatch:
