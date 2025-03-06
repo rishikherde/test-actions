@@ -38,11 +38,6 @@ jobs:
               with:
                 python-version: '3.10'
             
-            - name: Debug - List All Files
-              run: |
-                echo "Checking repo files:"
-                git ls-files 
-            
             - name: Debug - List Files
               run: ls -R /home/runner/work/test-actions/test-actions/ 
             
