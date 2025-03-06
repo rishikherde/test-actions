@@ -16,7 +16,7 @@ jobs:
                 mkdir -p data
                 cp students_data.csv data/students_data.csv
                 mkdir -p scripts
-                cp transform.py scripts/transfrom.py
+                cp transform.py scripts/transform.py
                 cp test_transform.py scripts/test_transform.py
 
             - name: Upload CSV artifact
