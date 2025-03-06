@@ -1,0 +1,93 @@
+name: CSV preocessing pipeline
+
+on:
+    workflow_dispatch:
+jobs:
+    extract:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+            
+            - name: Copy CSV
+              run: |
+                mkdir -p data
+                cp students_data.csv data/students_data.csv
+
+            - name: Upload CSV artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: raw-csv
+                path: data/students_data.csv
+    
+    transform:
+        runs-on: ubuntu-latest
+        needs: extract
+        steps: 
+            - name: Download csv artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: raw-csv
+                path: data/
+
+            - name: Installing python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.10'
+
+            - name: Transformations
+              run: |
+                python scripts/transform.py data/students_data.csv data/transformed.csv
+
+            - name: Uploading new csv artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: transformed-csv
+                path: data/transformed.csv
+
+    test:
+        runs-on: ubuntu-latest
+        needs: transform
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: transformed-csv
+                path: data/
+
+            - name: Install python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.10'
+
+            - name: testing
+              run: |
+                python scripts/test_transform.py data/transformed.csv
+
+            - name: Upload test report
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-report
+                path: test_report.txt
+
+    upload:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+
+            - name: Download transformed csv artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: transformed-csv
+                path: data/
+
+            - name: Commit and push changes
+              run: |
+                git config --global user.name "Github actions"
+                git config --global user.email "actions@github.com"
+                mv data/transformed.csv modified_students_data.csv
+                git add modified_students_data.csv
+                git commit -m "Updated CSV file after transformation"
+                git push
