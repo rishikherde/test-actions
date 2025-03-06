@@ -89,6 +89,9 @@ jobs:
               with:
                 python-version: '3.10'
 
+            - name: install pandas
+              run: pip install pandas
+
             - name: testing
               run: |
                 python test_transform.py data/transformed.csv
