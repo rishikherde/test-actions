@@ -15,9 +15,6 @@ jobs:
               run: |
                 mkdir -p data
                 cp students_data.csv data/students_data.csv
-                mkdir -p scripts
-                cp transform.py scripts/transform.py
-                cp test_transform.py scripts/test_transform.py
 
             - name: Upload CSV artifact
               uses: actions/upload-artifact@v4
@@ -45,7 +42,7 @@ jobs:
 
             - name: Transformations
               run: |
-                python scripts/transform.py data/students_data.csv data/transformed.csv
+                python transform.py data/students_data.csv data/transformed.csv
 
             - name: Uploading new csv artifact
               uses: actions/upload-artifact@v4
@@ -70,7 +67,7 @@ jobs:
 
             - name: testing
               run: |
-                python scripts/test_transform.py data/transformed.csv
+                python test_transform.py data/transformed.csv
 
             - name: Upload test report
               uses: actions/upload-artifact@v4
